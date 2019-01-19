@@ -2,8 +2,10 @@ package = cglfw
 headers = GLFW/glfw3.h
 headerFilter = GLFW/glfw3.h
 
-#staticLibraries.mingw = libglfw3.a
-#libraryPaths = C:/msys64/mingw64/lib
+staticLibraries = libglfw3.a
+libraryPaths.osx = /usr/local/lib
+libraryPaths.mingw = C:/msys64/mingw64/lib
+libraryPaths.linux = /usr/local/lib
 
 depends.osx = posix
 depends.mingw = posix windows
