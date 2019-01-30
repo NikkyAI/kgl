@@ -26,22 +26,20 @@ cache:
 
 before_install:
   - |
+    if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+      brew update
+    fi
+  - |
     if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
       PATH=$(echo "$PATH" | sed -e 's/:\/usr\/local\/lib\/jvm\/openjdk11\/bin//')
       JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
-
-      git clone https://github.com/glfw/glfw.git
-      cd glfw
-      cmake .
-      make
-      sudo make install
-      cd ..
     fi
-  - |
-    if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-      brew update
-      brew install glfw --HEAD --without-shared-library
-    fi
+  - git clone https://github.com/glfw/glfw.git
+  - cd glfw
+  - cmake .
+  - make
+  - sudo make install
+  - cd ..
 
 script:
   - ./gradlew build
